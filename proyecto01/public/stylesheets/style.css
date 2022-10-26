@@ -1,0 +1,247 @@
+body {
+  padding: 0%;
+  margin: 0%;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#navbar {
+  overflow: hidden;
+  background-color: white;
+  outline-color: black;
+}
+
+#navbar a {
+  float: right;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+#navbar a:hover {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+
+#portada h1{
+  font-size: 80px;
+  text-align: center;
+}
+
+#portada h4{
+  font-size: 35px;
+  text-align: center;
+}
+
+.containerButton {
+  text-align: center;
+}
+
+#contactBtn {
+  color: white;
+  background-color: black;  
+  font-size: 25px;
+  height: 65px;
+  width: 300px;
+  border-radius: 20px;
+  transition: background-color .5s;
+}
+
+#contactBtn:hover {
+  color: black;
+  background-color: transparent;
+  box-shadow: inset 2px 2px 40px -3px rgba(0,0,0,0.31);
+}
+
+.flexAbout{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content:center;
+  align-items: center;
+  row-gap: 2rem;
+  column-gap: 20%;
+}
+
+.ItemAbout{
+  width: 50%;
+}
+
+body div section{
+  margin: 15px;
+}
+
+.bgWhite {
+  background-color: white;
+  padding: 30px;
+}
+
+.bgWhite section h2 {
+  font-size: 40px;
+}
+
+.bgBlack section {
+  color: white;
+}
+
+.bgBlack section h2 {
+  font-size: 40px;
+}
+
+.bgBlack {
+  background-color: black;
+  padding: 30px;
+}
+
+#logosSN {
+  margin-left: 0%;
+}
+
+#logosSN img {
+  margin-right: 20px;
+}
+
+.caja-titulo {
+  color: white;
+  background-color: black;
+  width: 100%;
+  margin-left: 2px;
+  margin-right: 2px;
+  text-align: center;
+  grid-column: 1/2;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.caja-titulo > p {
+  font-size: 15;
+  margin-top: 30%;
+  margin-bottom: 30%;
+  font-size:large ;
+}
+
+
+.caja-linea {
+  font-size: 25px;
+  grid-column: 2/3;
+  margin-left: 0%;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-style: dashed;
+  border-color: black;
+  border-radius: 3px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 11px -7px 45px 4px rgba(0,0,0,0.75);
+}
+
+.caja-linea h4 {
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+.caja-linea p {
+  margin-top: 0%;
+}
+
+.container2col {
+  background-color: transparent;
+  display: grid;
+  grid-template-columns: 2;
+}
+
+#studies section .container2col{
+  margin-left: 7%;
+  margin-right: 7%;
+}
+
+#skillsFlex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+}
+
+.skilFlexItem > span > img{
+  padding: 5px;
+  align-items: center;
+}
+
+.certifFlex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  row-gap: 50px;
+  column-gap: 15%;
+}
+
+.certfItem {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.containerGridForm {
+  padding-left: 10%;
+  padding-right: 10%;
+  display: grid;
+  grid-template-columns: 2;
+  row-gap: 15px;
+}
+
+.containerGridForm label {
+  font-size: 20px;
+  grid-column: 1/2;
+}
+
+.containerGridForm input {
+  font-size: 20px;
+  grid-column: 2/3;
+}
+
+.containerGridForm textarea {
+  font-size: 20px;
+}
+
+#formulario {
+  margin-top: 40px;
+}
+
+#finalButtons {
+  grid-column: 2/3;
+}
+
+@media screen and (max-width:426){
+  
+  .flexAbout{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content:center;
+    align-items: center;
+    row-gap: 2rem;
+    column-gap: 20%;
+  }
+  
+  .ItemAbout{
+    width: 50%;
+  }
+
+}
