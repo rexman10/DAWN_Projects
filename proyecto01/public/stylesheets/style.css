@@ -78,11 +78,11 @@ a {
   justify-content:center;
   align-items: center;
   row-gap: 2rem;
-  column-gap: 20%;
+  column-gap: 5%;
 }
 
-.ItemAbout{
-  width: 50%;
+.itemAbout{
+  width: 37%;
 }
 
 body div section{
@@ -120,13 +120,12 @@ body div section{
 }
 
 .caja-titulo {
+  display: block;
   color: white;
   background-color: black;
   width: 100%;
   margin-left: 2px;
   text-align: center;
-  margin-top: 11%;
-  margin-bottom: 10%;
   grid-column: 1/2;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -194,6 +193,11 @@ body div section{
   align-items: center;
 }
 
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+
 .certifFlex {
   display: flex;
   flex-wrap: wrap;
@@ -252,7 +256,7 @@ body div section{
     column-gap: 20%;
   }
 
-    .ItemAbout{
+    .itemAbout{
     width: 50%;
   }
 
