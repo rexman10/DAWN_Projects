@@ -48,6 +48,10 @@ a {
   text-align: center;
 }
 
+.lineaPort {
+  margin-top: 140px;
+}
+
 .containerButton {
   text-align: center;
 }
@@ -120,18 +124,25 @@ body div section{
   background-color: black;
   width: 100%;
   margin-left: 2px;
-  margin-right: 2px;
   text-align: center;
+  margin-top: 11%;
+  margin-bottom: 10%;
   grid-column: 1/2;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
 
+.contentTitulo {
+  text-align: center;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .caja-titulo > p {
   font-size: 15;
-  margin-top: 30%;
-  margin-bottom: 30%;
-  font-size:large ;
+  margin-top: 50%;
 }
 
 
@@ -229,8 +240,9 @@ body div section{
   grid-column: 2/3;
 }
 
-@media screen and (max-width:426){
-  
+
+
+@media only screen and (max-width: 800px) {
   .flexAbout{
     display: flex;
     flex-flow: column wrap;
@@ -239,9 +251,30 @@ body div section{
     row-gap: 2rem;
     column-gap: 20%;
   }
-  
-  .ItemAbout{
+
+    .ItemAbout{
     width: 50%;
   }
 
+  .containerGridForm {
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    row-gap: 15px;
+    align-content: center;
+    align-items: stretch;
+  }
+  
+  .containerGridForm label {
+    font-size: 20px;
+    width: 50%;
+  }
+  
+  .containerGridForm input {
+    font-size: 20px;
+    width: 50%;
+  }
 }
+  
