@@ -140,8 +140,58 @@ let buscarTiempos = function() {
                 const parser = new DOMParser();
                 const xml = parser.parseFromString(result, "application/xml");
                 console.log(xml)
-                arreglo = xml.getElementsByTagName("LapList")
-                console.log(arreglo)
+                arreglo = xml.getElementsByTagName("Lap")
+                let cuerpo = document.getElementsByName("cuerpoTabla")[0]
+                let plantilla = ``
+                for (let index = 0; index < 10; index++) {
+                    const vueltas = arreglo[index];
+                    const numVuelta = vueltas.getAttribute('number');
+                    let tiempos = vueltas.getElementsByTagName('Timing')
+                    plantilla += 
+                    `
+                    <tr>
+                        <th scope="row">` + numVuelta + `</th>
+                    `
+                    for (let j = 0; j < 3; j++) {
+                        const XMLtiempo = tiempos[j];
+                        const driver = XMLtiempo.getAttribute('driverId');
+                        const lapTime = XMLtiempo.getAttribute('time')
+                        /*console.log(XMLtiempo);*/
+                        console.log(lapTime);
+                        let min = parseFloat(lapTime.split(':')[0]) * 60
+                        let seg = parseFloat(lapTime.split(':')[1].split('.')[0])
+                        let ms = parseFloat(lapTime.split(':')[1].split('.')[1]) /1000
+
+                        if (index == 0){
+
+                            plantilla += 
+                            `
+                                <td style="--start: ` + 0.0 + `; --size: ` + (min + seg + ms) / 180 + `" id="` + driver + numVuelta + `"> <span class="data">` + lapTime + `</span> </td>                   
+                            `
+
+                            console.log(min,seg,ms);
+                        } else if (index > 0){                            
+                            const XMLtiempoAnt = arreglo[index-1].getElementsByTagName('Timing')[j]
+                            const lapTimeAnt = XMLtiempoAnt.getAttribute('time')
+
+                            let minAnt = parseFloat(lapTimeAnt.split(':')[0]) * 60
+                            let segAnt = parseFloat(lapTimeAnt.split(':')[1].split('.')[0])
+                            let msAnt = parseFloat(lapTimeAnt.split(':')[1].split('.')[1]) /1000
+
+                            plantilla += 
+                            `
+                                <td style="--start: ` + (minAnt + segAnt + msAnt) / 180 + `; --size: ` + (min + seg + ms) / 180 + `" id="` + driver + numVuelta + `"> <span class="data">` + lapTime + `</span> </td>                   
+                            `                            
+                        }
+                        
+                    }
+                    plantilla +=
+                    `
+                    </tr>
+                    `                   
+                }
+                console.log(plantilla);
+                cuerpo.innerHTML = plantilla
                 
 
 
