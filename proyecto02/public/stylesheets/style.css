@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -10,4 +9,37 @@ a {
 
 .carousel-caption {
   color: black;
+  text-align: right;
+}
+
+#circuitos {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+
+.carousel-item img{
+  padding-left: 15%;
+}
+
+.carousel-inner {
+  background-color: rgba(244, 32, 32, 0.469);
+}
+
+#busquedaPilotos {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+#linePitstops {
+  margin: 0 auto;
+  background-color: #f6f6f6;
+}
+
+#linePitstops.line {
+  height: 200px;
+  max-width: 400px;
+  margin: 0 auto;
 }

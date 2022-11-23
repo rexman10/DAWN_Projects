@@ -97,12 +97,14 @@ let buscarTabla = function() {
                         const element = obj[key];
                         //console.log(element)
 
+                        num = element['permanentNumber']?element['permanentNumber']:"N/A"
+
                         etiqueta.innerHTML += 
                         `
                         <tr>
                             <td scope="row">` + element['givenName'] + `</td>
                             <td>` + element['familyName'] + `</td>
-                            <td>` + element['permanentNumber'] + `</td>
+                            <td>` + num + `</td>
                         </tr>
                         `
                         
@@ -117,3 +119,42 @@ let buscarTabla = function() {
 }
 
 buscarTabla()
+
+
+let buscarTiempos = function() {
+
+    let etiqueta = document.getElementsByName("linePitstops")[0]
+
+    let boton = document.getElementsByName("buscarPiloto")[0]
+
+    boton.addEventListener('click', () => {
+
+        let year = document.getElementById('anio').value
+
+        let url = "http://ergast.com/api/f1/" + year + "/1/laps?limit=1000"
+
+        fetch(url, requestOptions)
+		    .then(response => response.text())
+		    .then(result => {
+
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(result, "application/xml");
+                console.log(xml)
+                arreglo = xml.getElementsByTagName("LapList")
+                console.log(arreglo)
+                
+
+
+
+            })
+		    .catch(error => console.log('error', error));
+
+    })
+
+
+
+
+
+}
+
+buscarTiempos()
