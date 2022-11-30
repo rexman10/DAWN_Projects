@@ -24,6 +24,8 @@ let circuitos = [
 
 ]
 
+let ronda = 1
+
 let carousel = document.getElementsByClassName('carousel-inner')[0]
 let galeria = document.getElementsByClassName("carousel-indicators")[0]
 //console.log(carousel)
@@ -131,7 +133,7 @@ let buscarTiempos = function() {
 
         let year = document.getElementById('anio').value
 
-        let url = "http://ergast.com/api/f1/" + year + "/1/laps?limit=1000"
+        let url = "http://ergast.com/api/f1/" + year + "/" + ronda + "/laps?limit=1000"
 
         fetch(url, requestOptions)
 		    .then(response => response.text())
@@ -139,11 +141,13 @@ let buscarTiempos = function() {
 
                 const parser = new DOMParser();
                 const xml = parser.parseFromString(result, "application/xml");
-                console.log(xml)
+                //console.log(xml)
                 arreglo = xml.getElementsByTagName("Lap")
                 let cuerpo = document.getElementsByName("cuerpoTabla")[0]
+                let leyenda = document.getElementsByName("legend")[0]
+                leyenda.innerHTML = ""
                 let plantilla = ``
-                for (let index = 0; index < 10; index++) {
+                for (let index = 0; index < 40; index++) {
                     const vueltas = arreglo[index];
                     const numVuelta = vueltas.getAttribute('number');
                     let tiempos = vueltas.getElementsByTagName('Timing')
@@ -152,24 +156,25 @@ let buscarTiempos = function() {
                     <tr>
                         <th scope="row">` + numVuelta + `</th>
                     `
-                    for (let j = 0; j < 3; j++) {
+                    for (let j = 0; j < 10; j++) {
                         const XMLtiempo = tiempos[j];
                         const driver = XMLtiempo.getAttribute('driverId');
                         const lapTime = XMLtiempo.getAttribute('time')
                         /*console.log(XMLtiempo);*/
-                        console.log(lapTime);
+                        //console.log(lapTime);
                         let min = parseFloat(lapTime.split(':')[0]) * 60
                         let seg = parseFloat(lapTime.split(':')[1].split('.')[0])
                         let ms = parseFloat(lapTime.split(':')[1].split('.')[1]) /1000
 
                         if (index == 0){
+                            leyenda.innerHTML += `<li>` + driver + `</li>`
 
                             plantilla += 
                             `
                                 <td style="--start: ` + 0.0 + `; --size: ` + (min + seg + ms) / 180 + `" id="` + driver + numVuelta + `"> <span class="data">` + lapTime + `</span> </td>                   
                             `
 
-                            console.log(min,seg,ms);
+                            //console.log(min,seg,ms);
                         } else if (index > 0){                            
                             const XMLtiempoAnt = arreglo[index-1].getElementsByTagName('Timing')[j]
                             const lapTimeAnt = XMLtiempoAnt.getAttribute('time')
@@ -198,13 +203,185 @@ let buscarTiempos = function() {
 
             })
 		    .catch(error => console.log('error', error));
-
     })
-
-
-
-
-
 }
 
 buscarTiempos()
+
+let filtrarTiempo = function() {
+
+    let etiqueta = document.getElementsByName("linePitstops")[0]
+
+    let sig = document.getElementsByName("siguiente")[0]
+    
+    let ant = document.getElementsByName("anterior")[0]
+
+    sig.addEventListener('click', () => {
+
+        let year = document.getElementById('anio').value
+
+        ronda += 1
+
+        let url = "http://ergast.com/api/f1/" + year + "/" + ronda + "/laps?limit=1000"
+
+        console.log("ronda a mostrar="+ronda);
+
+        fetch(url, requestOptions)
+		    .then(response => response.text())
+		    .then(result => {
+
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(result, "application/xml");
+                //console.log(xml)
+                arreglo = xml.getElementsByTagName("Lap")
+                let cuerpo = document.getElementsByName("cuerpoTabla")[0]
+                let leyenda = document.getElementsByName("legend")[0]
+                leyenda.innerHTML = ""
+                let plantilla = ``
+                for (let index = 0; index < 40; index++) {
+                    const vueltas = arreglo[index];
+                    const numVuelta = vueltas.getAttribute('number');
+                    let tiempos = vueltas.getElementsByTagName('Timing')
+                    plantilla += 
+                    `
+                    <tr>
+                        <th scope="row">` + numVuelta + `</th>
+                    `
+                    for (let j = 0; j < 10; j++) {
+                        const XMLtiempo = tiempos[j];
+                        const driver = XMLtiempo.getAttribute('driverId');
+                        const lapTime = XMLtiempo.getAttribute('time')
+                        /*console.log(XMLtiempo);*/
+                        //console.log(lapTime);
+                        let min = parseFloat(lapTime.split(':')[0]) * 60
+                        let seg = parseFloat(lapTime.split(':')[1].split('.')[0])
+                        let ms = parseFloat(lapTime.split(':')[1].split('.')[1]) /1000
+
+                        if (index == 0){
+                            leyenda.innerHTML += `<li>` + driver + `</li>`
+
+                            plantilla += 
+                            `
+                                <td style="--start: ` + 0.0 + `; --size: ` + (min + seg + ms) / 180 + `" id="` + driver + numVuelta + `"> <span class="data">` + lapTime + `</span> </td>                   
+                            `
+
+                            //console.log(min,seg,ms);
+                        } else if (index > 0){                            
+                            const XMLtiempoAnt = arreglo[index-1].getElementsByTagName('Timing')[j]
+                            const lapTimeAnt = XMLtiempoAnt.getAttribute('time')
+
+                            let minAnt = parseFloat(lapTimeAnt.split(':')[0]) * 60
+                            let segAnt = parseFloat(lapTimeAnt.split(':')[1].split('.')[0])
+                            let msAnt = parseFloat(lapTimeAnt.split(':')[1].split('.')[1]) /1000
+
+                            plantilla += 
+                            `
+                                <td style="--start: ` + (minAnt + segAnt + msAnt) / 180 + `; --size: ` + (min + seg + ms) / 180 + `" id="` + driver + numVuelta + `"> <span class="data">` + lapTime + `</span> </td>                   
+                            `                            
+                        }
+                        
+                    }
+                    plantilla +=
+                    `
+                    </tr>
+                    `                   
+                }
+                console.log(plantilla);
+                cuerpo.innerHTML = plantilla
+                
+
+
+
+            })
+		    .catch(error => console.log('error', error));
+    })
+
+    ant.addEventListener('click', () => {
+
+        let year = document.getElementById('anio').value
+
+        if (ronda == 1) {
+            ronda = 20
+            let url = "http://ergast.com/api/f1/" + year + "/" + 20 + "/laps?limit=1000"
+            console.log("ronda a mostrar="+ronda);
+        } else {
+            ronda -= 1
+        }
+
+
+        let url = "http://ergast.com/api/f1/" + year + "/" + ronda + "/laps?limit=1000"
+
+        console.log("ronda a mostrar="+ronda);
+
+        fetch(url, requestOptions)
+		    .then(response => response.text())
+		    .then(result => {
+
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(result, "application/xml");
+                //console.log(xml)
+                arreglo = xml.getElementsByTagName("Lap")
+                let cuerpo = document.getElementsByName("cuerpoTabla")[0]
+                let leyenda = document.getElementsByName("legend")[0]
+                leyenda.innerHTML = ""
+                let plantilla = ``
+                for (let index = 0; index < 40; index++) {
+                    const vueltas = arreglo[index];
+                    const numVuelta = vueltas.getAttribute('number');
+                    let tiempos = vueltas.getElementsByTagName('Timing')
+                    plantilla += 
+                    `
+                    <tr>
+                        <th scope="row">` + numVuelta + `</th>
+                    `
+                    for (let j = 0; j < 10; j++) {
+                        const XMLtiempo = tiempos[j];
+                        const driver = XMLtiempo.getAttribute('driverId');
+                        const lapTime = XMLtiempo.getAttribute('time')
+                        /*console.log(XMLtiempo);*/
+                        //console.log(lapTime);
+                        let min = parseFloat(lapTime.split(':')[0]) * 60
+                        let seg = parseFloat(lapTime.split(':')[1].split('.')[0])
+                        let ms = parseFloat(lapTime.split(':')[1].split('.')[1]) /1000
+
+                        if (index == 0){
+                            leyenda.innerHTML += `<li>` + driver + `</li>`
+
+                            plantilla += 
+                            `
+                                <td style="--start: ` + 0.0 + `; --size: ` + (min + seg + ms) / 180 + `" id="` + driver + numVuelta + `"> <span class="data">` + lapTime + `</span> </td>                   
+                            `
+
+                            //console.log(min,seg,ms);
+                        } else if (index > 0){                            
+                            const XMLtiempoAnt = arreglo[index-1].getElementsByTagName('Timing')[j]
+                            const lapTimeAnt = XMLtiempoAnt.getAttribute('time')
+
+                            let minAnt = parseFloat(lapTimeAnt.split(':')[0]) * 60
+                            let segAnt = parseFloat(lapTimeAnt.split(':')[1].split('.')[0])
+                            let msAnt = parseFloat(lapTimeAnt.split(':')[1].split('.')[1]) /1000
+
+                            plantilla += 
+                            `
+                                <td style="--start: ` + (minAnt + segAnt + msAnt) / 180 + `; --size: ` + (min + seg + ms) / 180 + `" id="` + driver + numVuelta + `"> <span class="data">` + lapTime + `</span> </td>                   
+                            `                            
+                        }
+                        
+                    }
+                    plantilla +=
+                    `
+                    </tr>
+                    `                   
+                }
+                console.log(plantilla);
+                cuerpo.innerHTML = plantilla
+                
+
+
+
+            })
+		    .catch(error => console.log('error', error));
+    })
+}
+
+filtrarTiempo()

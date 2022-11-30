@@ -72,7 +72,7 @@
       <button type="submit" class="btn btn-primary" name="buscarPiloto">Buscar</button>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="tablaPilotos">
       <table class="table table-dark" >
         <thead>
           <tr>
@@ -87,8 +87,15 @@
       </table>
     </div>
 
-<div class="container-fluid">
-  <table class="charts-css line multiple show-heading hide-data show-labels show-data-axes show-primary-axis show-4-secondary-axes" id="linePitstops">
+<div class="container-fluid" id="graficos">
+  <div class="container-fluid" id="botonesFiltro">
+    <button type="button" name="anterior" id="anterior" class="btn btn-primary" btn-lg btn-block">Ronda Anterior</button>
+    <button type="button" name="siguiente" id="siguiente" class="btn btn-primary" btn-lg btn-block">Siguiente Ronda</button>
+  </div>
+  <ul class="charts-css legend legend-circle legend-inline" name="legend">
+
+  </ul>
+  <table class="charts-css line multiple show-heading hide-data show-labels show-data-axes show-primary-axis show-8-secondary-axes legend legend-circle" id="linePitstops">
     <caption> Tiempos de vuelta </caption>
     <tbody name="cuerpoTabla">
 
