@@ -25,6 +25,7 @@ let circuitos = [
 ]
 
 let ronda = 1
+let rondasMax = 0
 
 let carousel = document.getElementsByClassName('carousel-inner')[0]
 let galeria = document.getElementsByClassName("carousel-indicators")[0]
@@ -116,6 +117,20 @@ let buscarTabla = function() {
             })
         .catch(error => console.log('error', error));
 
+
+        fetch("http://ergast.com/api/f1/"+year+"/circuits", requestOptions)
+		    .then(response => response.text())
+		    .then(result => {
+                
+                console.log(result);
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(result, "application/xml");
+                rondasMax = xml.getElementsByTagName("Circuit").length
+                console.log(rondasMax);
+
+            })
+		    .catch(error => console.log('error', error));
+
     })
 
 }
@@ -143,6 +158,7 @@ let buscarTiempos = function() {
                 const xml = parser.parseFromString(result, "application/xml");
                 //console.log(xml)
                 arreglo = xml.getElementsByTagName("Lap")
+                let circuitoName = xml.getElementsByTagName("CircuitName")[0].innerHTML
                 let cuerpo = document.getElementsByName("cuerpoTabla")[0]
                 let leyenda = document.getElementsByName("legend")[0]
                 leyenda.innerHTML = ""
@@ -197,6 +213,7 @@ let buscarTiempos = function() {
                 }
                 console.log(plantilla);
                 cuerpo.innerHTML = plantilla
+                document.getElementById("circuitoHolder").innerHTML = "Tiempo de vuelta ronda " + ronda + " Pista: " + circuitoName
                 
 
 
@@ -220,7 +237,13 @@ let filtrarTiempo = function() {
 
         let year = document.getElementById('anio').value
 
-        ronda += 1
+        if (ronda == rondasMax) {
+            ronda = 1
+            let url = "http://ergast.com/api/f1/" + year + "/" + 20 + "/laps?limit=1000"
+            console.log("ronda a mostrar="+ronda);
+        } else {
+            ronda += 1
+        }
 
         let url = "http://ergast.com/api/f1/" + year + "/" + ronda + "/laps?limit=1000"
 
@@ -234,6 +257,7 @@ let filtrarTiempo = function() {
                 const xml = parser.parseFromString(result, "application/xml");
                 //console.log(xml)
                 arreglo = xml.getElementsByTagName("Lap")
+                let circuitoName = xml.getElementsByTagName("CircuitName")[0].innerHTML
                 let cuerpo = document.getElementsByName("cuerpoTabla")[0]
                 let leyenda = document.getElementsByName("legend")[0]
                 leyenda.innerHTML = ""
@@ -288,6 +312,7 @@ let filtrarTiempo = function() {
                 }
                 console.log(plantilla);
                 cuerpo.innerHTML = plantilla
+                document.getElementById("circuitoHolder").innerHTML = "Tiempo de vuelta ronda " + ronda + " Pista: " + circuitoName
                 
 
 
@@ -301,7 +326,7 @@ let filtrarTiempo = function() {
         let year = document.getElementById('anio').value
 
         if (ronda == 1) {
-            ronda = 20
+            ronda = rondasMax
             let url = "http://ergast.com/api/f1/" + year + "/" + 20 + "/laps?limit=1000"
             console.log("ronda a mostrar="+ronda);
         } else {
@@ -321,6 +346,7 @@ let filtrarTiempo = function() {
                 const xml = parser.parseFromString(result, "application/xml");
                 //console.log(xml)
                 arreglo = xml.getElementsByTagName("Lap")
+                let circuitoName = xml.getElementsByTagName("CircuitName")[0].innerHTML
                 let cuerpo = document.getElementsByName("cuerpoTabla")[0]
                 let leyenda = document.getElementsByName("legend")[0]
                 leyenda.innerHTML = ""
@@ -375,6 +401,7 @@ let filtrarTiempo = function() {
                 }
                 console.log(plantilla);
                 cuerpo.innerHTML = plantilla
+                document.getElementById("circuitoHolder").innerHTML = "Tiempo de vuelta ronda " + ronda + " Pista: " + circuitoName
                 
 
 
