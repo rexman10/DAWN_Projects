@@ -4,3 +4,11 @@
         <li><a routerLink="/pilotos" >Siguiente</a></li>
     </ul>
 </span>
+<div class="container-fluid" id="busquedaAnios">
+    <div class="form-group">
+      <h1>Busqueda de pilotos por año:</h1>
+      <label for="anio">Ingrese un año</label>
+      <input type="text" class="form-control" #anio aria-describedby="helpId" placeholder="Ejemplo: 2003">
+    </div>
+    <button type="submit" class="btn btn-primary" name="buscarAnio" (click)="getValue(anio.value)">Buscar</button>
+</div>
