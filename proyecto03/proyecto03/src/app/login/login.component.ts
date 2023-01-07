@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NombresService } from '../services/nombres.service';
 import { Router } from '@angular/router';
+import { PilotosComponent } from '../pilotos/pilotos.component';
+import { MRData } from '../interfaz/mrdata';
+import { RootObject } from '../interfaz/root-object';
 
 @Component({
   selector: 'app-login',
@@ -9,31 +12,34 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit{
 
-  yearSelection:number
-
+  yearSelection:string = ''
 
   constructor(private resourcesService: NombresService, private router: Router) {
-    this.yearSelection = Number.parseInt('55');
-    this.generarNumero();
+    localStorage.clear()
     console.log(document.getElementsByClassName("form-control"));
-    
-    
   }
   ngOnInit(): void {
+    //console.log("prueba de orden ngOnInit");
     this.generarNumero();
   }
 
   getValue(val:string){
-    this.yearSelection = Number.parseInt(val);
-    
+    this.yearSelection = val;
   }
 
   generarNumero(){
     let boton = document.getElementsByClassName("btn")[0];;
-    boton?.addEventListener('click', () => {
+    boton.addEventListener('click', () => {
       console.log("El año escogido es " + this.yearSelection);
-      
-      
+
+      this.resourcesService.getData(this.yearSelection).subscribe(response => {
+        console.log("res de login component",response);
+              
+        localStorage.setItem("dataF1", JSON.stringify(response));
+        //console.log("dataf1",dataF1);
+        document.getElementsByName("continuar")[0].setAttribute('disabled',"true")
+                                     
+      });               
     });
   }
 
