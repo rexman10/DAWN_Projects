@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Driver } from '../interfaz/driver';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pistas',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./pistas.component.css']
 })
 export class PistasComponent {
+
+  pilot!:Driver;
+
+  constructor(private route: ActivatedRoute) {}
 
 }

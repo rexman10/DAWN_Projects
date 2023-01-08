@@ -10,28 +10,32 @@ import { NombresService } from '../services/nombres.service';
 export class PilotosComponent {
 
   pilotos?:Driver[];
+  yearSelection:string = '';
 
   constructor(private resourceService:NombresService){
-
     console.log("entro a pilotos");
 
     let nombresPilotos = JSON.parse(localStorage.getItem("dataF1")!);
 
     console.log("nombresPilotos del componente ", nombresPilotos);
     
-      
     if(nombresPilotos) {
-      let tabla = nombresPilotos["MRData"]["DriverTable"]["Drivers"]
-      
+      let tabla = nombresPilotos["MRData"]["DriverTable"]["Drivers"];
       this.pilotos = tabla as Driver[]
     } 
+
+    let anio = localStorage.getItem('anioActual');
+
+    if(anio){
+      this.yearSelection = anio;
+    }
 
     console.log("esto es el atributo pilotos", this.pilotos);
 
   }
 
   ngOnInit(): void {
-    console.log("Segunda prueba ngoninit"); 
+    console.log("Segunda prueba ngoninit");
   }
 
 

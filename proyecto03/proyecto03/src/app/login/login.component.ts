@@ -28,16 +28,17 @@ export class LoginComponent implements OnInit{
   }
 
   generarNumero(){
-    let boton = document.getElementsByClassName("btn")[0];;
+    let boton = document.getElementsByClassName("btn")[0];
     boton.addEventListener('click', () => {
       console.log("El año escogido es " + this.yearSelection);
+      document.getElementsByName('continuar')[0].removeAttribute('disabled')
 
       this.resourcesService.getData(this.yearSelection).subscribe(response => {
+        localStorage.setItem("anioActual",this.yearSelection);
         console.log("res de login component",response);
-              
+        document.getElementsByName('continuar')[0]['attributes']
         localStorage.setItem("dataF1", JSON.stringify(response));
         //console.log("dataf1",dataF1);
-        document.getElementsByName("continuar")[0].setAttribute('disabled',"true")
                                      
       });               
     });

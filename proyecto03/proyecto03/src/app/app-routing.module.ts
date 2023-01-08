@@ -9,7 +9,7 @@ import { StatsComponent } from './stats/stats.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'pilotos', component: PilotosComponent },
-  { path: 'pistas', component: PistasComponent },
+  { path: ':pilot/pistas', component: PistasComponent },
   { path: 'stats', component: StatsComponent, },
 ];
 
