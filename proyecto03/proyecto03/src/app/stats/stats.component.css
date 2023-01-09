@@ -1,0 +1,13 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../../assets/font/Formula1-Regular.ttf);
+  }
+
+h1 {
+    font-family: myFirstFont;
+}
+
+.imgPortada {
+    width: fit-content;
+    height: 20vw;
+}

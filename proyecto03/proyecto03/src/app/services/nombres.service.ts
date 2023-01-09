@@ -38,5 +38,10 @@ export class NombresService {
     let res = this.http.get('https://countryflagsapi.com/png/'+pais)   
     return res
   }
+
+  getStandings(anio:string, driver:string){
+    let res = this.http.get('http://ergast.com/api/f1/'+anio+'/drivers/'+driver+'/results.json')   
+    return res
+  }
 }
 

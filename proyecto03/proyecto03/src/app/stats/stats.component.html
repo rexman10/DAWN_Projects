@@ -1,1 +1,27 @@
-<p>stats works!</p>
+<div class="container-fluid">
+    <h1>
+        <a href="{{circuito.url}}">{{circuito.circuitName}}</a>
+    </h1>
+    <div class="card">
+        <div class="container-fluid" id="logoHolder">
+            <img src="../../assets/images/logo.png" alt="F1 logo" class="imgPortada">
+        </div>
+
+        <ul class="list-group list-group-flush" >
+            <li class="list-group-item">
+                <div class="nameHolder">
+                    <p>Termino en la posicion {{resultado.grid}}, obteniendo {{resultado.points}} puntos</p>
+                </div>
+                <div class="nameHolder">
+                    <p>Corriendo para la escuderia {{resultado.Constructor.name}}</p>
+                </div>
+                <div class="nameHolder">
+                    <p>Velocidad promedio durante la carrera de {{resultado.FastestLap.AverageSpeed.speed}} {{resultado.FastestLap.AverageSpeed.units}}</p>
+                </div>
+                <div class="nameHolder">
+                    <p>La vuelta mas rapida registrada con un tiempo de {{resultado.FastestLap.Time.time}}</p>
+                </div>
+            </li>           
+        </ul>
+    </div>
+</div>
