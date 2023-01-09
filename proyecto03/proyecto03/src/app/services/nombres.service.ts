@@ -24,5 +24,14 @@ export class NombresService {
     let res = this.http.get('http://ergast.com/api/f1/'+anio+'/drivers.json')   
     return res
   }
+
+  getPistas(anio:string) {
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    let res = this.http.get('http://ergast.com/api/f1/'+anio+'/circuits.json')   
+    return res
+  }
 }
 

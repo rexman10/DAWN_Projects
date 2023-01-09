@@ -1,5 +1,27 @@
 .imgPortada {
+    width: fit-content;
+    height: 20vw;
+}
 
-    size: 1.5rem;
-    
+#logoHolder{
+    display: flex;
+    justify-content: center;
+}
+
+.list-group-item{
+    display: flex;
+    justify-content: center;
+    column-gap: 3%;
+}
+
+.numeroHolder{
+    background-color: red;
+    font-size: 3rem;
+    color: black;   
+    padding: 2%;
+
+}
+
+.nameHolder{  
+    font-size: 3rem;
 }

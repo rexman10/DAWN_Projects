@@ -1,17 +1,22 @@
-<p>pilotos works!</p>
 <h1>Pilotos del año {{yearSelection}}</h1>
 <div class="container-fluid">
     <div class="card">
-        <img src="../../assets/images/logo.png" alt="F1 logo" class="imgPortada">
-        <div class="card-body">
-            <h4 class="card-title">Title</h4>
-            <p class="card-text">Text</p>
+        <div class="container-fluid" id="logoHolder">
+            <img src="../../assets/images/logo.png" alt="F1 logo" class="imgPortada">
         </div>
+
         <ul class="list-group list-group-flush" *ngFor="let piloto of pilotos">
-            <div>
-                <article *ngIf="piloto.permanentNumber"></article>
-                <li class="list-group-item" >{{piloto.givenName + " " + piloto.familyName}}</li>                
-            </div>
+            <li class="list-group-item" id="{{piloto.driverId}}" *ngIf="piloto.permanentNumber" >
+                <div class="numeroHolder">
+                    <p>{{piloto.permanentNumber}}</p>
+                </div>
+                <div class="nameHolder">
+                    <p>{{piloto.givenName + " " + piloto.familyName}}</p>
+                </div>
+                <div>
+                    <a name="btnCircuitos" id="btn-{{piloto.driverId}}" class="btn btn-primary" role="button" (click)="getPistas()" >Seleccionar</a>
+                </div>
+            </li>           
         </ul>
     </div>
 </div>

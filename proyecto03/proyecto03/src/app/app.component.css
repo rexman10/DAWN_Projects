@@ -1,0 +1,9 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../assets/font/Formula1-Regular.ttf);
+  }
+
+body {
+    font-family: myFirstFont;
+}
+  
