@@ -49,6 +49,7 @@ export class PilotosComponent {
 
   ngAfterViewChecked() {
     let botones = document.getElementsByName("btnCircuitos")
+    let etiquetas = document.getElementsByClassName("nameHolder")
     //console.log(botones);
     for (let index = 0; index < botones.length; index++) {
       const element = botones[index];
@@ -56,6 +57,7 @@ export class PilotosComponent {
       
       element.addEventListener('click', () => {
         this.pilotCodeSelection = element.id.split("-")[1]
+        localStorage.setItem("textoPiloto",etiquetas[index].children[0].innerHTML)
       })
       
     }

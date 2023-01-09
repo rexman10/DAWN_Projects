@@ -1,0 +1,16 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../../assets/font/Formula1-Regular.ttf);
+  }
+
+h1 {
+    font-family: myFirstFont;
+}
+
+.container-fluid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20%;
+    row-gap: 13px;
+}

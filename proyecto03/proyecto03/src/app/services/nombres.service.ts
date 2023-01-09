@@ -33,5 +33,10 @@ export class NombresService {
     let res = this.http.get('http://ergast.com/api/f1/'+anio+'/circuits.json')   
     return res
   }
+
+  getBandera(pais:string){
+    let res = this.http.get('https://countryflagsapi.com/png/'+pais)   
+    return res
+  }
 }
 

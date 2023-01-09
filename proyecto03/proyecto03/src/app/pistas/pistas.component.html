@@ -1,1 +1,29 @@
-<p>pistas works!</p>
+<div class="container-fluid">
+    <h1>
+        <a href="{{pilot.url}}">{{pilot.givenName}} {{pilot.familyName}}</a>
+    </h1>
+    <div class="card">
+        <div class="container-fluid" id="logoHolder">
+            <img src="../../assets/images/logo.png" alt="F1 logo" class="imgPortada">
+        </div>
+
+        <ul class="list-group list-group-flush" *ngFor="let circuito of circuitos">
+            <li class="list-group-item" id="circuito.circuitId"  >
+                <div class="flagHolder">
+                    <p>{{circuito.Location.country}}</p>
+                    <img
+                    crossorigin="anonymous"
+                    src="https://countryflagsapi.com/png/{{circuito.Location.country}}"
+                    width="160"
+                    alt="{{circuito.Location.country}}">
+                </div>
+                <div class="nameHolder">
+                    <p>{{circuito.circuitName}}</p>
+                </div>
+                <div>
+                    <a name="btnCircuitos" id="{{circuito.Location.country}}" class="btn btn-primary" role="button" (click)="getStats(circuito.circuitId)" >Seleccionar</a>
+                </div>
+            </li>           
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../../assets/font/Formula1-Regular.ttf);
+  }
+
+h1 {
+    font-family: myFirstFont;
+}
+
+.imgPortada {
+    width: fit-content;
+    height: 20vw;
+}
+
+#logoHolder{
+    display: flex;
+    justify-content: center;
+}
+
+.list-group-item{
+    display: flex;
+    justify-content: center;
+    column-gap: 3%;
+}
+
+.list-group-item{
+    background-color: rgb(209, 167, 167);
+}
+
+
+.nameHolder{  
+    font-size: 1.9rem;
+}
